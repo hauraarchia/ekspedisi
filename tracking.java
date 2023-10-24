@@ -31,7 +31,7 @@ public class tracking {
         jam = sc.nextInt();
 
         if (jam <=12.00 ) {
-            System.out.println ("Pesanan dikirim hari ini");
+            System.out.println ("Pesanan sedang dikirim");
             System.out.println("Status : Terkirim");      
          } else{
             System.out.println("Barang dikirim besok");
