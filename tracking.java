@@ -15,12 +15,13 @@ public class tracking {
             noResi = sc.next();
             i++;
             
-            System.out.println("Masukkan tanggal pengiriman");
+            System.out.println("Masukkan tanggal pemesanan");
             tanggal = sc.nextInt();
             System.out.println("Masukkan jam pemesanan");
             jam = sc.nextInt();
+            System.out.println("==============================");
 
-            if (noResi.equals("123A")) {
+            if (noResi.equalsIgnoreCase("123A")) {
                 System.out.println("No Resi :" + noResi);
                 System.out.println("Nama Penerima : Isnaeny");
                     if (jam <=12.00) {
@@ -30,7 +31,7 @@ public class tracking {
                         System.out.println("Pesanan dikirim besok");
                         System.out.println("Status : On Process");
                     }
-            } else if (noResi.equals("234B")) {
+            } else if (noResi.equalsIgnoreCase("234B")) {
                 System.out.println("No Resi :" + noResi);
                 System.out.println("Nama Penerima : Haura");
                     if (jam <=12.00) {
@@ -40,7 +41,7 @@ public class tracking {
                         System.out.println("Pesanan dikirim besok");
                         System.out.println("Status : On Process");
                     }
-            } else if (noResi.equals("345C")) {
+            } else if (noResi.equalsIgnoreCase("345C")) {
                 System.out.println("No Resi :" + noResi);
                 System.out.println("Nama Penerima : Lutfi");
                     if (jam <=12.00) {
@@ -55,8 +56,13 @@ public class tracking {
                 break;
             } 
 
-        barangSampai = (int) (tanggal + 2);
-        System.out.println("Estimasi barang sampai tanggal : " + barangSampai);
+        barangSampai = (tanggal + 4);
+        if (barangSampai > 30){
+            barangSampai -= 30;
+            System.out.println("Estimasi barang sampai pada tanggal : " + barangSampai + " pada bulan selanjutnya");
+        } else{
+            System.out.println("Estimasi barang sampai pada tanggal : " + barangSampai);
         }
-    }    
-}
+        }   
+    }
+}    
