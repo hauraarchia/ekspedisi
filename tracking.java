@@ -2,14 +2,17 @@ import java.util.Scanner;
 public class tracking {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         String noResi, namaPenerima, status;
         int barangSampai, tanggal, jam, jumlahResi;
 
+        System.out.println("");
         System.out.println("Masukkan jumlah resi");
         jumlahResi = sc.nextInt();
 
         int i = 0;
         while (i < jumlahResi) {
+            System.out.println("");
             System.out.println("Masukkan nomor resi(123A/234B/345C) ");
             System.out.println("Masukkan nomor resi ke- " + (i+1)+ " : ");
             noResi = sc.next();
@@ -62,6 +65,7 @@ public class tracking {
             System.out.println("Estimasi barang sampai pada tanggal : " + barangSampai + " pada bulan selanjutnya");
         } else{
             System.out.println("Estimasi barang sampai pada tanggal : " + barangSampai);
+            System.out.println("");
         }
         }   
     }
