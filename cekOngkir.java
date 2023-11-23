@@ -29,9 +29,9 @@ public class cekOngkir {
                 "No", "Kota Tujuan", "Harga Standart", "Harga Cargo");
                 System.out.println(
                 "---------------------------------------------------------------------------------------------------------------");
-                for (int i = 0; i < ongkir; i++) {
+                for (int j = 0; j < ongkir; j++) {
             System.out.printf("%-5d | %-25s | %-20s | %-20s%n",
-                    i + 1, kota[i], hargaReg[i], hargaCargo[i]);
+                    j + 1, kota[j], hargaReg[j], hargaCargo[j]);
 
         }
         System.out.println(" ");
@@ -41,18 +41,18 @@ public class cekOngkir {
         if (choice.equalsIgnoreCase("y")) {
             if (ongkir < kota.length) {
                 sc.nextLine(); // Membersihkan newline
-                System.out.println("----------------------------------");
+                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
                 System.out.println("     TAMBAH KOTA TUJUAN BARU");
-                System.out.println("----------------------------------");
-                System.out.print("Kota Tujuan   : ");
+                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                System.out.print("Kota Tujuan : ");
                 kota[ongkir] = sc.nextLine();
                 System.out.print("Harga Standart : ");
                 hargaReg[ongkir] = sc.nextInt();
-                System.out.print("Harga Cargo     : ");
+                System.out.print("Harga Cargo : ");
                 hargaCargo[ongkir] = sc.nextInt();
                 ongkir++;
             } else {
-                System.out.println("Batas maksimum nasabah baru telah tercapai");
+                System.out.println("Batas maksimum kota tujuan telah tercapai");
             }
         }
         System.out.println(" ");
