@@ -2,6 +2,7 @@ import java.util.Scanner;
 public class tracking {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         String noResi, namaPenerima, status;
         int barangSampai, tanggal, jam;
 
@@ -31,13 +32,19 @@ public class tracking {
         jam = sc.nextInt();
 
         if (jam <=12.00 ) {
-            System.out.println ("Pesanan dikirim hari ini");
+            System.out.println ("Pesanan sedang dikirim");
             System.out.println("Status : Terkirim");      
          } else{
             System.out.println("Barang dikirim besok");
             System.out.println("Status : On process");}
 
-        barangSampai = (int) (tanggal + 4);
-        System.out.println("Estimasi barang sampai tanggal : " + barangSampai);
-    }
+        barangSampai = (tanggal + 4);
+        if (barangSampai > 30){
+            barangSampai -= 30;
+            System.out.println("Estimasi barang sampai pada tanggal : " + barangSampai + " pada bulan selanjutnya");
+        } else{
+            System.out.println("Estimasi barang sampai pada tanggal : " + barangSampai);
+            System.out.println("");
+        }
+}
 }
