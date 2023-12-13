@@ -61,9 +61,9 @@ public class cetakResi {
                       
                 if (input < namaPengirim.length) { 
                     do {
-                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                        System.out.println("===================================");
                         System.out.println("        TAMBAH BARANG MASUK        ");
-                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                        System.out.println("===================================");
                         sc.nextLine(); // Membersihkan newline 
                         System.out.print("Masukkan Nama Pengirim  : ");
                         namaPengirim[input] = sc.nextLine();
@@ -127,9 +127,9 @@ public class cetakResi {
                 case 2:
                 //Cetak Resi
                     sc.nextLine();
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    System.out.println("===================================");
                     System.out.println("            CETAK RESI             ");
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    System.out.println("===================================");
 
                     System.out.print("Masukkan Nama Pengirim untuk menambah No Resi: ");
                     String Resi = sc.nextLine();
@@ -165,9 +165,9 @@ public class cetakResi {
                 case 3:
                 //Menambahkan status pengiriman
                     sc.nextLine();
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    System.out.println("===================================");
                     System.out.println("     UPDATE STATUS PENGIRIMAN      ");
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    System.out.println("===================================");
 
                     System.out.print("Masukkan No Resi yang akan diupdate status: ");
                     String statusUp = sc.nextLine();
@@ -184,18 +184,18 @@ public class cetakResi {
                     if (statusIn != -1) {
                         System.out.println("Masukkan Status Pengiriman (Diproses || Dikirim || Diterima)");
                         status[statusIn] = sc.nextLine();
-                        System.out.println("  !Status Pengirim Update!");
+                        System.out.println("  !Status Pengirim Update!  ");
                     } else {
-                        System.out.println("  !No Resi Tidak Ditemukan!");
+                        System.out.println("  !No Resi Tidak Ditemukan! ");
                     }
                     break;
                 
                 case 4:  
                 //Lacak Pengiriman
                     sc.nextLine();
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    System.out.println("===================================");
                     System.out.println("         LACAK PENGIRIMAN          ");
-                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                    System.out.println("===================================");
 
                     System.out.print("Masukkan No Resi : ");
                     String resiLacak = sc.nextLine();
@@ -221,9 +221,9 @@ public class cetakResi {
 
                    for (int i = 0; i < input; i++) {
                         System.out.println(" ");
-                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                        System.out.println("===================================");
                         System.out.println("         LAPORAN PENDAPATAN        ");
-                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                        System.out.println("===================================");
                         System.out.println(" No Resi       : " + noResi [i]);
                         System.out.println(" Nama Pengirim : " + namaPengirim [i]);
                         System.out.println(" Nama Penerima : " + namaPenerima [i]);
