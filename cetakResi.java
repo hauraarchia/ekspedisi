@@ -24,6 +24,13 @@ public class cetakResi {
         String[] kota = new String[10]; //kota tujuan
         int[] hargaReg = new int[10]; //layanan standart atau reguler
         int[] hargaCargo = new int[10]; //layanan cargo
+        String[] pengirim = new String[10];
+
+        namaPengirim[0] = "isna";
+        namaPengirim[1] = "luthfi";
+
+        namaPenerima[0] = "haura";
+        namaPenerima[1] = "isna";
 
         kota[0] = "Pasuruan";
         kota[1] = "Surabaya";
@@ -39,8 +46,9 @@ public class cetakResi {
         hargaCargo[2] = 12000;
 
         int hasil = 0; //harga 
-        int input = 0; //input barang masuk
+        int input = 2; //input barang masuk
         int ongkir = 3; 
+        
 
         do {
             System.out.println(" ");
@@ -137,8 +145,9 @@ public class cetakResi {
                     //Mencari pengirim
                     int resiIndex = - 1;
                     for (int i = 0; i < input; i++) {
-                        if (namaPengirim[i].equalsIgnoreCase(Resi)) {
-                            resiIndex = i++;
+                        if (Resi.equalsIgnoreCase(namaPengirim[i])) {
+                            resiIndex = i;
+                            break;
                         }   
                     }
 
