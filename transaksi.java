@@ -1,34 +1,46 @@
 import java.util.Scanner;
+
 public class transaksi {
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int hasil = 0;
+        int hasil = -1;
         String key;
         int tujuan;
+        
 
         String[] namaPengirim = new String[25];
         String[] namaPenerima = new String[25];
         String[] kotaT = new String[25];
         String[] layanan = new String[25];
-        int[] berat = new int[25];
+        double[] berat = new double[25];
         double[] total = new double[25];
         int[] bayar = new int[25];
         int[] kembalian = new int[25];
+        double[] jumlah = new double[25];
+
+        namaPengirim[0] = "isna";
+        namaPenerima[0] = "haura";
+        kotaT[0] = "Pasuruan";
+        layanan[0] = "standart";
+        berat[0] = 3;
+        total[0] = 30000;
+        bayar[0] = 50000;
+        kembalian[0] = 20000;
+
+        String[] kota = new String[10]; // kota tujuan
+        double[] hargaReg = new double[10]; // layanan standart atau reguler
+        double[] hargaCargo = new double[10]; // layanan cargo
 
         int input = 0;
 
-
-        //cek ongkir
-        // table ongkir & kayanan
-        String[] kota = new String[10]; // kota tujuan
-        int[] hargaReg = new int[10]; // layanan standart atau reguler
-        int[] hargaCargo = new int[10]; // layanan cargo
+        // cek ongkir
 
         kota[0] = "Pasuruan";
         kota[1] = "Surabaya";
         kota[2] = "Probolinggo";
 
-        //standart
+        // standart
         hargaReg[0] = 10000;
         hargaReg[1] = 12000;
         hargaReg[2] = 14000;
@@ -39,9 +51,7 @@ public class transaksi {
 
         int ongkir = 3;
 
-
-
-        //program transaksi
+        // program transaksi
         System.out.println(" ");
         System.out.print("Apakah Ingin Menambah Pengiriman? (y/n): ");
         String choice = sc.next();
@@ -56,50 +66,57 @@ public class transaksi {
                 namaPengirim[input] = sc.nextLine();
                 System.out.print("Masukkan Nama Penerima : ");
                 namaPenerima[input] = sc.nextLine();
-                System.out.print("Masukkan Kota Tujuan(gunakan awalan huruf kapital): ");
+                System.out.print("Masukkan Kota Tujuan (gunakan awalan huruf kapital): ");
                 kotaT[input] = sc.nextLine();
                 System.out.print("Masukkan Jenis Layanan (cargo/standart): ");
                 layanan[input] = sc.nextLine();
-                //menggambil nilai array
-                //start
-                int k=0;
-                int l=0;
-                int m=0;
-                while (k < kota.length) {
-                    if (kota[k] == kota[input]) {
-
+                // menggambil nilai array
+                // start
+                
+                
+                
+            for (int k = 0; k < kota.length; k++ ) {
+                    if (kota[k].equalsIgnoreCase(kotaT[input])) {
                         hasil = k;
-                       // System.out.println(hasil);
-                       // k++;
+                        
+                        break;
+                        // System.out.println(hasil);
+                        // k++;
                     }
-
-                    //layanan cargo
-                    if (layanan[input] == "cargo" || layanan[input] == "Cargo") {
-                        hargaCargo[ongkir] = hasil;
-                    } 
-                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input] + " dan layanan "+ layanan[input] +": "+ hargaCargo[l]);
-
-                        System.out.print("Masukkan Berat Barang: ");
-                        berat[input] = sc.nextInt();
-                        System.out.println("Total Pesanan: " + berat[input] * hargaCargo[l] );
-
-                        //standart/reguler
-                    if (layanan[input] == "standart" || layanan[input] == "Standart") {
-                        hargaReg[ongkir] = hasil;
                     }
-
-                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input] + " dan layanan "+ layanan[input] +": "+ hargaReg[m]);
+                if (layanan[input].equalsIgnoreCase("cargo")) {
+                        
+                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input] + " dan layanan "
+                        + layanan[input] + ": " + hargaCargo[hasil]);
+                    
                         
                         System.out.print("Masukkan Berat Barang: ");
                         berat[input] = sc.nextInt();
-                        System.out.println("Total Pesanan: " + berat[input] * hargaReg[m] );
+                        jumlah[input] = berat[input] * hargaCargo[hasil];
+                        System.out.println("total pesanan :" + jumlah[input]);
+
+                    
+                    // standart/reguler  
+                } else if (layanan[input].equalsIgnoreCase("standart")) {
                         
+                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input] + " dan layanan "
+                        + layanan[input] + ": " + hargaReg[hasil]);
+                        
+                        System.out.print("Masukkan Berat Barang: ");
+                        berat[input] = sc.nextInt();
+                        jumlah[input] = berat[input] * hargaReg[hasil];
+                        System.out.println("total pesanan :" + jumlah[input]);
                     }
-                    input++;
-            } 
-        }else{
+
+                    
+                
+                input++;
+                 
+                //  System.out.println(hasil);
+            }
+
+        } else {
             return;
-        }
+        }  
     }
-}
-
+                    }
