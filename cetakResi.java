@@ -24,13 +24,6 @@ public class cetakResi {
         String[] kota = new String[10]; //kota tujuan
         int[] hargaReg = new int[10]; //layanan standart atau reguler
         int[] hargaCargo = new int[10]; //layanan cargo
-        String[] pengirim = new String[10];
-
-        namaPengirim[0] = "isna";
-        namaPengirim[1] = "luthfi";
-
-        namaPenerima[0] = "haura";
-        namaPenerima[1] = "isna";
 
         kota[0] = "Pasuruan";
         kota[1] = "Surabaya";
@@ -83,52 +76,48 @@ public class cetakResi {
                         layanan[input] = sc.nextLine();
                         // menggambil nilai array
                         // start
-                        int k = 0;
-                        int l = 0;
-                        int m = 0;
-                    
-                       if(k < kota.length) {
-                            if (kota[k] == kota[input]) {
+        
+                        for (int k = 0; k < kota.length; k++) {
+                            if (kota[k].equalsIgnoreCase(kotaT[input])) {
                                 hasil = k;
-                            // System.out.println(hasil);
-                            // k++;
-                        }
 
-                        // layanan cargo
-                        if (layanan[input] == "cargo" || layanan[input] == "Cargo") {
-                            hargaCargo[ongkir] = hasil;
-                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input] + " dan layanan "
-                            + layanan[input] + ": " + hargaCargo[l]);
-                            
+                                break;
+                                // System.out.println(hasil);
+                                // k++;
+                            }
+                        }
+                        if (layanan[input].equalsIgnoreCase("cargo")) {
+
+                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
+                                    + " dan layanan "
+                                    + layanan[input] + ": " + hargaCargo[hasil]);
+
                             System.out.print("Masukkan Berat Barang: ");
                             berat[input] = sc.nextInt();
-                            jumlah[input] = berat[input] * hargaCargo[l];
+                            jumlah[input] = berat[input] * hargaCargo[hasil];
                             System.out.println("total pesanan :" + jumlah[input]);
-                            
-                        }
-                            
-                        // standart/reguler
-                        else{
-                            hargaReg[ongkir] = hasil;
-                            
-                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input] + " dan layanan "
-                            + layanan[input] + ": " + hargaReg[m]);
-                            
+
+                            // standart/reguler
+                        } else if (layanan[input].equalsIgnoreCase("standart")) {
+
+                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
+                                    + " dan layanan "
+                                    + layanan[input] + ": " + hargaReg[hasil]);
+
                             System.out.print("Masukkan Berat Barang: ");
                             berat[input] = sc.nextInt();
-                            jumlah[input] = berat[input] * hargaReg[m];
+                            jumlah[input] = berat[input] * hargaReg[hasil];
                             System.out.println("total pesanan :" + jumlah[input]);
+
                         }
-                            System.out.println("Masukkan Jumlah Uang Pembayaran: ");
-                            bayar[input] = sc.nextInt();
-                            kembalian[input] = bayar[input] - jumlah[input];
-                            System.out.println("Kembalian Anda : " +(int) kembalian[input]);
-                        
+                        System.out.println("Masukkan Jumlah Uang Pembayaran: ");
+                        bayar[input] = sc.nextDouble();
+                        kembalian[input] = bayar[input] - jumlah[input];
+                        System.out.println("Kembalian Anda: " + kembalian[input]);
                         input++;
-                        }
                         System.out.println("Apakah ingin menambah kota tujuan baru lagi? (y/n)");
                         re = sc.next().charAt(0);
-                    } while (re == 'y' || re == 'Y');  
+                    } while (re == 'y' || re == 'Y');
                 }
                 break;
 
@@ -155,19 +144,24 @@ public class cetakResi {
                     if (resiIndex != -1) {
                         System.out.print("Masukkan No Resi: ");
                         noResi[resiIndex] = sc.nextLine();
-                        System.out.println("  !No Resi Update!");
+                        System.out.println(" ");
+                        System.out.println(" !! No Resi Update !!   ");
                     }else {
-                        System.out.println("Nama Pengirim Tidak Ditemukan");
+                        System.out.println(" ");
+                        System.out.println(" !! Nama Pengirim Tidak Ditemukan !!");
                     }
 
                     if (resiIndex != -1) {
                         System.out.println(" ");
-                        System.out.println(" No Resi        : " + noResi [resiIndex]);
-                        System.out.println(" Nama Pengirim  : " + namaPengirim [resiIndex]);
-                        System.out.println(" Nama Penerima  : " + namaPenerima [resiIndex]);
-                        System.out.println(" Kota Tujuan    : " + kotaT [resiIndex]);
-                        System.out.println(" Jenis Layanan  : " + layanan [resiIndex]);
-                        System.out.println(" Total Bayar    : " + jumlah [resiIndex]);
+                        System.out.printf(" ------------------------------%n");
+                        System.out.printf(" | %-13s : %-10s | %n", "No Resi", noResi [resiIndex]);
+                        System.out.printf(" ------------------------------%n");
+                        System.out.printf(" | %-13s : %-10s | %n", "Nama Pengirim", namaPengirim [resiIndex]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Nama Penerima", namaPenerima [resiIndex]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Kota Tujuan", kotaT [resiIndex]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Jenis Layanan", layanan [resiIndex]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Total Bayar", jumlah [resiIndex]);
+                        System.out.printf(" ------------------------------%n");
                     } 
                     break;
 
@@ -193,9 +187,9 @@ public class cetakResi {
                     if (statusIn != -1) {
                         System.out.println("Masukkan Status Pengiriman (Diproses || Dikirim || Diterima)");
                         status[statusIn] = sc.nextLine();
-                        System.out.println("  !Status Pengirim Update!  ");
+                        System.out.println("  !Status Pengirim Update!");
                     } else {
-                        System.out.println("  !No Resi Tidak Ditemukan! ");
+                        System.out.println("  !No Resi Tidak Ditemukan!");
                     }
                     break;
                 
@@ -208,7 +202,6 @@ public class cetakResi {
 
                     System.out.print("Masukkan No Resi : ");
                     String resiLacak = sc.nextLine();
-                    System.out.println(" ");
 
                     // Mencari no resi
                     int lacakIndex = -1;
@@ -219,20 +212,34 @@ public class cetakResi {
                     }
 
                     if (lacakIndex != -1) {
-                        System.out.println("Status Pengiriman untuk No Resi " + noResi[lacakIndex] + ": " + status[lacakIndex]);
+                        System.out.println(" Status Pengiriman untuk No Resi " + noResi[lacakIndex] + " : " + status[lacakIndex]);
                     } else {
-                        System.out.println("No Resi Tidak Ditemukan");
+                        System.out.println(" No Resi Tidak Ditemukan");
                     }
                     break;
                     
                 case 5:
                 //Laporan Pendapatan
 
+                    System.out.println(" ");
+                    System.out.println("===================================");
+                    System.out.println("         LAPORAN PENDAPATAN        ");
+                    System.out.println("===================================");
                    for (int i = 0; i < input; i++) {
+                        System.out.printf(" ------------------------------%n");
+                        System.out.printf(" | %-13s : %-10s | %n", "No Resi", noResi [i]);
+                        System.out.printf(" ------------------------------%n");
+                        System.out.printf(" | %-13s : %-10s | %n", "Nama Pengirim", namaPengirim [i]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Nama Penerima", namaPenerima [i]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Kota Tujuan", kotaT [i]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Jenis Layanan", layanan [i]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Total Bayar", jumlah [i]);
+                        System.out.printf(" | %-13s : %-10s | %n", "Status", status [i]);
+                        System.out.printf(" ------------------------------%n");
                         System.out.println(" ");
-                        System.out.println("===================================");
+                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
                         System.out.println("         LAPORAN PENDAPATAN        ");
-                        System.out.println("===================================");
+                        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
                         System.out.println(" No Resi       : " + noResi [i]);
                         System.out.println(" Nama Pengirim : " + namaPengirim [i]);
                         System.out.println(" Nama Penerima : " + namaPenerima [i]);

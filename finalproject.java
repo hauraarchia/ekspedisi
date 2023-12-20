@@ -14,9 +14,7 @@ public class finalproject {
         boolean login = false;
 
         // transaksi
-        int hasilResi = -1;
         int hasil = -1;
-        int update = -1;
         String key;
         int tujuan;
 
@@ -55,11 +53,11 @@ public class finalproject {
         kembalian[0] = 20000;
         kembalian[1] = 26000;
 
-        status[0] = "Dalam Proses";
-        status[1] = "Dalam Pengiriman";
+        noResi[0] = "1111";
+        noResi[1] = "2222";
 
-        noResi[0] = "hau12";
-        noResi[1] = "is1";
+        status[0] = "dalam proses";
+        status[1] = "dalam pengiriman";
 
         int input = 2;
 
@@ -80,8 +78,11 @@ public class finalproject {
         hargaCargo[1] = 15000;
         hargaCargo[2] = 12000;
 
-        // //update status
-        // String[] statusUp = new String[25];
+        // DATA INPUT
+        String[] resi = new String[10];
+        String[] pengirim = new String[10];
+        String[] penerima = new String[10];
+        int[] total = new int[10];
 
         int ongkir = 3; // ongkir
         int percobaan = 0; // login
@@ -107,82 +108,236 @@ public class finalproject {
                                         + " di Sistem Ekspedisi 333 Anda Sedang Login Sebagai Admin");
                         System.out.println("PILIH MENU: ");
                         System.out.println("1. Input Data Barang ");
-                        System.out.println("2. Cek Ongkir ");
-                        System.out.println("3. Cetak Resi");
+                        System.out.println("2. Cetak Resi");
+                        System.out.println("3. Lacak Pesanan");
                         System.out.println("4. Pencarian ");
-                        System.out.println("5. Lacak Pengiriman");
+                        System.out.println("5. Cek Ongkir ");
                         System.out.println("6. Laporan Pendapatan ");
-                        System.out.println("7. Keluar ");
+                        System.out.println("7. Keluar");
 
                         System.out.print("Masukkan Angka Pilihan Menu: ");
                         int menu = sc.nextInt();
                         switch (menu) {
                             // input data baarang
                             case 1:
-
                                 if (input < namaPengirim.length) {
-                                    sc.nextLine(); // Membersihkan newline
-                                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                                    System.out.println("        TAMBAH BARANG MASUK        ");
-                                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                                    System.out.print("Masukkan Nama Pengirim  : ");
-                                    namaPengirim[input] = sc.nextLine();
-                                    System.out.print("Masukkan Nama Penerima : ");
-                                    namaPenerima[input] = sc.nextLine();
-                                    System.out.print("Masukkan Kota Tujuan(gunakan awalan huruf kapital): ");
-                                    kotaT[input] = sc.nextLine();
-                                    System.out.print("Masukkan Jenis Layanan (cargo/standart): ");
-                                    layanan[input] = sc.nextLine();
-                                    // menggambil nilai array
-                                    // start
+                                    do {
+                                        sc.nextLine(); // Membersihkan newline
+                                        System.out.println("===================================");
+                                        System.out.println("        TAMBAH BARANG MASUK        ");
+                                        System.out.println("===================================");
+                                        System.out.print("Masukkan Nama Pengirim  : ");
+                                        namaPengirim[input] = sc.nextLine();
+                                        System.out.print("Masukkan Nama Penerima : ");
+                                        namaPenerima[input] = sc.nextLine();
+                                        System.out.print("Masukkan Kota Tujuan(gunakan awalan huruf kapital): ");
+                                        kotaT[input] = sc.nextLine();
+                                        System.out.print("Masukkan Jenis Layanan (cargo/standart): ");
+                                        layanan[input] = sc.nextLine();
+                                        // menggambil nilai array
+                                        // start
 
-                                    for (int k = 0; k < kota.length; k++) {
-                                        if (kota[k].equalsIgnoreCase(kotaT[input])) {
-                                            hasil = k;
+                                        for (int k = 0; k < kota.length; k++) {
+                                            if (kota[k].equalsIgnoreCase(kotaT[input])) {
+                                                hasil = k;
 
+                                                break;
+                                                // System.out.println(hasil);
+                                                // k++;
+                                            }
+                                        }
+                                        if (layanan[input].equalsIgnoreCase("cargo")) {
+
+                                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
+                                                    + " dan layanan "
+                                                    + layanan[input] + ": " + hargaCargo[hasil]);
+
+                                            System.out.print("Masukkan Berat Barang: ");
+                                            berat[input] = sc.nextInt();
+                                            jumlah[input] = berat[input] * hargaCargo[hasil];
+                                            System.out.println("total pesanan :" + (int) jumlah[input]);
+
+                                            // standart/reguler
+                                        } else if (layanan[input].equalsIgnoreCase("standart")) {
+
+                                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
+                                                    + " dan layanan "
+                                                    + layanan[input] + ": " + hargaReg[hasil]);
+
+                                            System.out.print("Masukkan Berat Barang: ");
+                                            berat[input] = sc.nextInt();
+                                            jumlah[input] = berat[input] * hargaReg[hasil];
+                                            System.out.println("total pesanan :" + (int) jumlah[input]);
+
+                                        }
+                                        System.out.println("Masukkan Jumlah Uang Pembayaran: ");
+                                        bayar[input] = sc.nextDouble();
+                                        kembalian[input] = bayar[input] - jumlah[input];
+                                        System.out.println("Kembalian Anda: " + (int) kembalian[input]);
+                                        sc.nextLine();
+                                        System.out.println("Masukkan Status Pengiriman: ");
+                                        status[input] = sc.nextLine();
+                                        System.out.println("Status Pengiriman Anda: " + status[input]);
+                                        input++;
+                                        System.out.println("Apakah ingin menambah kota tujuan baru lagi? (y/n)");
+                                        re = sc.next().charAt(0);
+                                    } while (re == 'y' || re == 'Y');
+                                }
+                                break;
+                            case 2:
+                                if (input < noResi.length) {
+
+                                    sc.nextLine();
+                                    System.out.println("===================================");
+                                    System.out.println("            CETAK RESI             ");
+                                    System.out.println("===================================");
+
+                                    System.out.print("Masukkan Nama Pengirim untuk menambah No Resi: ");
+                                    String Resi = sc.nextLine();
+
+                                    // Mencari pengirim
+                                    int resiIndex = -1;
+                                    for (int e = 0; e < input; e++) {
+                                        if (Resi.equalsIgnoreCase(namaPengirim[e])) {
+                                            resiIndex = e;
                                             break;
-                                            // System.out.println(hasil);
-                                            // k++;
                                         }
                                     }
-                                    if (layanan[input].equalsIgnoreCase("cargo")) {
 
-                                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
-                                                + " dan layanan "
-                                                + layanan[input] + ": " + hargaCargo[hasil]);
-
-                                        System.out.print("Masukkan Berat Barang: ");
-                                        berat[input] = sc.nextInt();
-                                        jumlah[input] = berat[input] * hargaCargo[hasil];
-                                        System.out.println("total pesanan :" + (int) jumlah[input]);
-
-                                        // standart/reguler
-                                    } else if (layanan[input].equalsIgnoreCase("standart")) {
-
-                                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
-                                                + " dan layanan "
-                                                + layanan[input] + ": " + hargaReg[hasil]);
-
-                                        System.out.print("Masukkan Berat Barang: ");
-                                        berat[input] = sc.nextInt();
-                                        jumlah[input] = berat[input] * hargaReg[hasil];
-                                        System.out.println("total pesanan :" + (int) jumlah[input]);
-
+                                    // update no resi
+                                    if (resiIndex != -1) {
+                                        System.out.print("Masukkan No Resi: ");
+                                        noResi[resiIndex] = sc.nextLine();
+                                        System.out.println(" ");
+                                        System.out.println(" !! No Resi Update !!   ");
+                                    } else {
+                                        System.out.println(" ");
+                                        System.out.println(" !! Nama Pengirim Tidak Ditemukan !!");
                                     }
-                                    System.out.println("Masukkan Jumlah Uang Pembayaran: ");
-                                    bayar[input] = sc.nextDouble();
-                                    kembalian[input] = bayar[input] - jumlah[input];
-                                    System.out.println("Kembalian Anda: " + (int) kembalian[input]);
-                                    sc.nextLine();
-                                    System.out.println("Masukkan Status Pengiriman: ");
-                                    status[input] = sc.nextLine();
-                                    System.out.println("Status Pengiriman Anda Saat ini: " + status[input]);
 
-                                    input++;
+                                    if (resiIndex != -1) {
+                                        System.out.println(" ");
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.printf(" | %-13s : %-10s | %n", "No Resi", noResi[resiIndex]);
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.printf(" | %-13s : %-10s | %n", "Nama Pengirim",
+                                                namaPengirim[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Nama Penerima",
+                                                namaPenerima[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Kota Tujuan", kotaT[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Jenis Layanan", layanan[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Total Bayar",
+                                                (int) jumlah[resiIndex]);
+                                        System.out.printf(" ------------------------------%n");
+                                    }
+                                }
+                                break;
+                            case 3:
+                                do {
+
+                                    System.out.println("PIlih Menu: ");
+                                    System.out.println("1. Lacak Pengiriman");
+                                    System.out.println("2. Update Status Pengiriman");
+                                    System.out.print("Masukkan Angka Pilihan: ");
+                                    menu = sc.nextInt();
+                                    switch (menu) {
+                                        case 1:
+                                            if (input < noResi.length) {
+                                                sc.nextLine();
+                                                System.out.println("===================================");
+                                                System.out.println("         LACAK PENGIRIMAN          ");
+                                                System.out.println("===================================");
+
+                                                System.out.print("Masukkan No Resi : ");
+                                                String resiLacak = sc.nextLine();
+
+                                                // Mencari no resi
+                                                int lacakIndex = -1;
+                                                for (int l = 0; l < noResi.length; l++) {
+                                                    if (noResi[l].equalsIgnoreCase(resiLacak)) {
+                                                        lacakIndex = l;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if (lacakIndex != -1) {
+                                                    System.out.println(" Status Pengiriman untuk No Resi " + "'"
+                                                            + noResi[lacakIndex] + "'"
+                                                            + " : " + status[lacakIndex]);
+                                                } else {
+                                                    System.out.println(" No Resi Tidak Ditemukan");
+                                                }
+                                            }
+
+                                            break;
+                                        case 2:
+                                            if (input < status.length) {
+                                                sc.nextLine();
+                                                System.out.println("===================================");
+                                                System.out.println("     UPDATE STATUS PENGIRIMAN      ");
+                                                System.out.println("===================================");
+
+                                                System.out.print("Masukkan No Resi yang akan diupdate status: ");
+                                                String statusUp = sc.nextLine();
+
+                                                // Mencari no resi
+                                                int statusIn = -1;
+                                                for (int q = 0; q < input; q++) {
+                                                    if (noResi[q].equalsIgnoreCase(statusUp)) {
+                                                        statusIn = q;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if (statusIn != -1) {
+                                                    System.out.println(
+                                                            "Masukkan Status Pengiriman (Diproses || Dikirim || Diterima)");
+                                                    status[statusIn] = sc.nextLine();
+                                                    System.out.println("  !Status Pengirim Update!");
+                                                } else {
+                                                    System.out.println("  !No Resi Tidak Ditemukan!");
+                                                }
+                                                input++;
+                                            }
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    System.out.println("Apakah anda ingin kembali?");
+                                    re = sc.next().charAt(0);
+                                } while (re == 'y' || re == 'Y');
+                                break;
+                            case 4:
+                                if (input < noResi.length) {
+                                    sc.nextLine();
+
+                                    System.out.println("Masukkan nomor resi: ");
+                                    String pencResi = sc.nextLine();
+
+                                    int pencarian = -1;
+                                    for (int q = 0; q < noResi.length; q++) {
+                                        if (noResi[q].equalsIgnoreCase(pencResi)) {
+                                            pencarian = q;
+                                            break;
+
+                                        }
+                                    }
+                                    if (pencarian != 1) {
+                                        System.out.println("=================================");
+                                        System.out.println("            PENCARIAN            ");
+                                        System.out.println("=================================");
+                                        System.out.println("No Resi: " + noResi[pencarian]);
+                                        System.out.println("Nama Pengirim: " + namaPengirim[pencarian]);
+                                        System.out.println("Nama Penerima: " + namaPenerima[pencarian]);
+                                        System.out.println("Kota Tujuan: " + kotaT[pencarian]);
+                                        System.out.println("=================================");
+                                    } else {
+                                        System.out.println("No Resii tidak ditemukan");
+                                    }
                                 }
                                 break;
                             // cek ongkir
-                            case 2:
+                            case 5:
                                 System.out.printf("%-5s | %-25s | %-20s | %-20s%n",
                                         "No", "Kota Tujuan", "Harga Standart", "Harga Cargo");
                                 System.out.println(
@@ -198,6 +353,7 @@ public class finalproject {
                                 String ulang = sc.next();
                                 // sc.next();
                                 do {
+
                                     if (ulang.equalsIgnoreCase("y")) {
                                         if (ongkir < kota.length) {
                                             sc.nextLine(); // Membersihkan newline
@@ -233,165 +389,36 @@ public class finalproject {
                                     kembali = sc.next().charAt(0);
                                 } while (kembali == 'y' || kembali == 'Y');
                                 break;
-                            case 3:
-                                if (input < noResi.length) {
-
-                                    sc.nextLine();
-                                    System.out.println("===================================");
-                                    System.out.println("            CETAK RESI             ");
-                                    System.out.println("===================================");
-
-                                    System.out.print("Masukkan Nama Pengirim untuk menambah No Resi: ");
-                                    String Resi = sc.nextLine();
-
-                                    // Mencari pengirim
-                                    int resiIndex = -1;
-                                    for (int n = 0; n < input; n++) {
-                                        if (Resi.equalsIgnoreCase(namaPengirim[n])) {
-                                            resiIndex = n;
-                                            break;
-                                        }
-                                    }
-
-                                    // update no resi
-                                    if (resiIndex != -1) {
-                                        System.out.print("Masukkan No Resi: ");
-                                        noResi[resiIndex] = sc.nextLine();
-                                        System.out.println("  !No Resi Update!");
-                                    } else {
-                                        System.out.println("Nama Pengirim Tidak Ditemukan");
-                                    }
-
-                                    System.out.println("---------------------------------------------------");
-                                    // System.out.println(" ");
-                                    System.out.println(" No Resi        : " + noResi[resiIndex]);
-                                    System.out.println(" Nama Pengirim  : " + namaPengirim[resiIndex]);
-                                    System.out.println(" Nama Penerima  : " + namaPenerima[resiIndex]);
-                                    System.out.println(" Kota Tujuan    : " + kotaT[resiIndex]);
-                                    System.out.println(" Jenis Layanan  : " + layanan[resiIndex]);
-                                    System.out.println(" Total Bayar    : " + jumlah[resiIndex]);
-                                    System.out.println(" Status Pesanan : " + status[resiIndex]);
-                                    System.out.println("---------------------------------------------------");
-                                    input++;
-                                }
-                                break;
-                            case 4:
-                                if (input < noResi.length) {
-
-                                    System.out.println("Masukkan nomor resi: ");
-                                    String pencResi = sc.nextLine();
-
-                                    int pencarian = -1;
-                                    for (int f = 0; f < noResi.length; f++) {
-                                        if (noResi[f].equalsIgnoreCase(pencResi)) {
-                                            pencarian = f;
-                                            break;
-
-                                        }
-                                    }
-                                    System.out.println("No Resi: " + noResi[pencarian]);
-                                    System.out.println("Nama Pengirim: " + namaPengirim[pencarian]);
-                                    System.out.println("Nama Penerima: " + namaPenerima[pencarian]);
-                                    System.out.println("Kota Tujuan: " + kotaT[pencarian]);
-                                }
-                                break;
-                            case 5:
-                                System.out.println("Pilih Menu");
-                                System.out.println("1. Lacak Pengiriman");
-                                System.out.println("2. Update Status Pengiriman");
-                                System.out.println("Masukkan Angka Pilihan Menu: ");
-                                int choice = sc.nextInt();
-                                switch (choice) {
-                                    case 1:
-                                        if (input < noResi.length) {
-                                            sc.nextLine();
-                                            System.out.println("===================================");
-                                            System.out.println("         LACAK PENGIRIMAN          ");
-                                            System.out.println("===================================");
-
-                                            System.out.print("Masukkan No Resi : ");
-                                            String resiLacak = sc.nextLine();
-                                            System.out.println("--------------------------");
-
-                                            // Mencari no resi
-                                            int lacakIndex = -1;
-                                            for (int q = 0; q < noResi.length; q++) {
-                                                if (noResi[q].equalsIgnoreCase(resiLacak)) {
-                                                    lacakIndex = q;
-                                                    System.out.println(
-                                                            "Status Pengiriman untuk No Resi " + "'" + resiLacak + "'"
-                                                                    + ": " + status[lacakIndex]);
-                                                    break;
-                                                }
-                                            }
-
-                                            // Check if the resiLacak was not found
-                                            if (lacakIndex == -1) {
-                                                System.out.println("!No Resi Tidak Ditemukan!");
-                                            }
-                                        }
-                                        break;
-                                    case 2:
-                                        if (input < status.length) {
-
-                                            sc.nextLine();
-                                            System.out.println("===================================");
-                                            System.out.println("     UPDATE STATUS PENGIRIMAN      ");
-                                            System.out.println("===================================");
-
-                                            System.out.print("Masukkan No Resi yang akan diupdate status: ");
-                                            String statusUp = sc.nextLine();
-
-                                            // Mencari no resi
-                                            int hasilstatus = -1;
-                                            for (int q = 0; q < noResi.length; q++) {
-                                                if (noResi[q].equalsIgnoreCase(statusUp)) {
-                                                    hasilstatus = q;
-                                                    break;
-                                                }
-                                            }
-
-                                            if (hasilstatus != -1) {
-                                                System.out.println(
-                                                        "Masukkan Status Pengiriman (Diproses || Dikirim || Diterima): ");
-                                                status[input] = sc.nextLine();
-                                                System.out.println("  !Status Pengirim Update!  ");
-                                            } else {
-                                                System.out.println("  !No Resi Tidak Ditemukan! ");
-                                            }
-                                            input++;
-                                        }
-                                        break;
-                                    default:
-                                        break;
-                                }
-
-                                break;
                             case 6:
-                                for (int b = 0; b < input; b++) {
+                                do {
                                     System.out.println(" ");
                                     System.out.println("===================================");
                                     System.out.println("         LAPORAN PENDAPATAN        ");
                                     System.out.println("===================================");
-                                    System.out.println(" No Resi       : " + (noResi[b] != null ? noResi[b] : ""));
-                                    System.out.println(
-                                            " Nama Pengirim : " + (namaPengirim[b] != null ? namaPengirim[b] : ""));
-                                    System.out.println(
-                                            " Nama Penerima : " + (namaPenerima[b] != null ? namaPenerima[b] : ""));
-                                    System.out.println(" Kota Tujuan   : " + (kotaT[b] != null ? kotaT[b] : ""));
-                                    System.out.println(" Jenis Layanan : " + (layanan[b] != null ? layanan[b] : ""));
-                                    System.out.println(" Total Bayar   : " + (jumlah[b] != 0.0 ? jumlah[b] : ""));
-                                    System.out.println(" Status        : " + (status[b] != null ? status[b] : ""));
-                                    System.out.println();
-                                }
+                                    for (int r = 0; r < input; r++) {
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.printf(" | %-13s : %-10s | %n", "No Resi", noResi[r]);
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.printf(" | %-13s : %-10s | %n", "Nama Pengirim", namaPengirim[r]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Nama Penerima", namaPenerima[r]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Kota Tujuan", kotaT[r]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Jenis Layanan", layanan[r]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Total Bayar", (int) jumlah[r]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Status", status[r]);
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.println(" ");
+                                    }
+                                    System.out.println("Apakah ingin kembali? (y/n)");
+                                    kembali = sc.next().charAt(0);
+                                } while (kembali == 'y' || kembali == 'Y');
                                 break;
                             default:
                                 break;
                         }
-                        System.out.println("apakah anda ingin kembali ke menu utama?(y/n)");
-                        keluar = sc.next().charAt(0);
-                    } while (keluar == 'y' || keluar == 'Y');
-                    break;
+                        // keluar == 'y' || keluar == 'Y'
+                        // System.out.println("Apakah anda ingin lanjut?(y/n)");
+                        // keluar = sc.next().charAt(0);
+                    } while (login);
                 }
                 if (userName[1].equals(username) && password[1].equals(pass)) {
                     do {
@@ -399,80 +426,233 @@ public class finalproject {
                                 "Selamat Datang " + username + " di Sistem Ekspedisi 333 Anda Login Sebagai Kasir");
                         System.out.println("PILIH MENU: ");
                         System.out.println("1. Input Data Barang ");
-                        System.out.println("2. Cek Ongkir ");
-                        System.out.println("3. Cetak Resi");
+                        System.out.println("2. Cetak Resi");
+                        System.out.println("3. Lacak Pesanan");
                         System.out.println("4. Pencarian ");
-                        System.out.println("5. Lacak Pengiriman");
+                        System.out.println("5. Cek Ongkir ");
 
                         System.out.print("Masukkan Angka Pilihan Menu: ");
                         int menu = sc.nextInt();
                         switch (menu) {
                             // input data baarang
                             case 1:
-
                                 if (input < namaPengirim.length) {
-                                    sc.nextLine(); // Membersihkan newline
-                                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                                    System.out.println("        TAMBAH BARANG MASUK        ");
-                                    System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
-                                    System.out.print("Masukkan Nama Pengirim  : ");
-                                    namaPengirim[input] = sc.nextLine();
-                                    System.out.print("Masukkan Nama Penerima : ");
-                                    namaPenerima[input] = sc.nextLine();
-                                    System.out.print("Masukkan Kota Tujuan(gunakan awalan huruf kapital): ");
-                                    kotaT[input] = sc.nextLine();
-                                    System.out.print("Masukkan Jenis Layanan (cargo/standart): ");
-                                    layanan[input] = sc.nextLine();
-                                    // menggambil nilai array
-                                    // start
+                                    do {
+                                        sc.nextLine(); // Membersihkan newline
+                                        System.out.println("===================================");
+                                        System.out.println("        TAMBAH BARANG MASUK        ");
+                                        System.out.println("===================================");
+                                        System.out.print("Masukkan Nama Pengirim  : ");
+                                        namaPengirim[input] = sc.nextLine();
+                                        System.out.print("Masukkan Nama Penerima : ");
+                                        namaPenerima[input] = sc.nextLine();
+                                        System.out.print("Masukkan Kota Tujuan(gunakan awalan huruf kapital): ");
+                                        kotaT[input] = sc.nextLine();
+                                        System.out.print("Masukkan Jenis Layanan (cargo/standart): ");
+                                        layanan[input] = sc.nextLine();
+                                        // menggambil nilai array
+                                        // start
 
-                                    for (int k = 0; k < kota.length; k++) {
-                                        if (kota[k].equalsIgnoreCase(kotaT[input])) {
-                                            hasil = k;
+                                        for (int k = 0; k < kota.length; k++) {
+                                            if (kota[k].equalsIgnoreCase(kotaT[input])) {
+                                                hasil = k;
 
+                                                break;
+                                                // System.out.println(hasil);
+                                                // k++;
+                                            }
+                                        }
+                                        if (layanan[input].equalsIgnoreCase("cargo")) {
+
+                                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
+                                                    + " dan layanan "
+                                                    + layanan[input] + ": " + hargaCargo[hasil]);
+
+                                            System.out.print("Masukkan Berat Barang: ");
+                                            berat[input] = sc.nextInt();
+                                            jumlah[input] = berat[input] * hargaCargo[hasil];
+                                            System.out.println("total pesanan :" + (int) jumlah[input]);
+
+                                            // standart/reguler
+                                        } else if (layanan[input].equalsIgnoreCase("standart")) {
+
+                                            System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
+                                                    + " dan layanan "
+                                                    + layanan[input] + ": " + hargaReg[hasil]);
+
+                                            System.out.print("Masukkan Berat Barang: ");
+                                            berat[input] = sc.nextInt();
+                                            jumlah[input] = berat[input] * hargaReg[hasil];
+                                            System.out.println("total pesanan :" + (int) jumlah[input]);
+
+                                        }
+                                        System.out.println("Masukkan Jumlah Uang Pembayaran: ");
+                                        bayar[input] = sc.nextDouble();
+                                        kembalian[input] = bayar[input] - jumlah[input];
+                                        System.out.println("Kembalian Anda: " + (int) kembalian[input]);
+                                        sc.nextLine();
+                                        System.out.println("Masukkan Status Pengiriman: ");
+                                        status[input] = sc.nextLine();
+                                        System.out.println("Status Pengiriman Anda: " + status[input]);
+                                        input++;
+                                        System.out.println("Apakah ingin menambah kota tujuan baru lagi? (y/n)");
+                                        re = sc.next().charAt(0);
+                                    } while (re == 'y' || re == 'Y');
+                                }
+                                break;
+                            case 2:
+                                if (input < noResi.length) {
+
+                                    sc.nextLine();
+                                    System.out.println("===================================");
+                                    System.out.println("            CETAK RESI             ");
+                                    System.out.println("===================================");
+
+                                    System.out.print("Masukkan Nama Pengirim untuk menambah No Resi: ");
+                                    String Resi = sc.nextLine();
+
+                                    // Mencari pengirim
+                                    int resiIndex = -1;
+                                    for (int e = 0; e < input; e++) {
+                                        if (Resi.equalsIgnoreCase(namaPengirim[e])) {
+                                            resiIndex = e;
                                             break;
-                                            // System.out.println(hasil);
-                                            // k++;
                                         }
                                     }
-                                    if (layanan[input].equalsIgnoreCase("cargo")) {
 
-                                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
-                                                + " dan layanan "
-                                                + layanan[input] + ": " + hargaCargo[hasil]);
-
-                                        System.out.print("Masukkan Berat Barang: ");
-                                        berat[input] = sc.nextInt();
-                                        jumlah[input] = berat[input] * hargaCargo[hasil];
-                                        System.out.println("total pesanan :" + (int) jumlah[input]);
-
-                                        // standart/reguler
-                                    } else if (layanan[input].equalsIgnoreCase("standart")) {
-
-                                        System.out.println("Harga Pengiriman dengan tujuan kota " + kotaT[input]
-                                                + " dan layanan "
-                                                + layanan[input] + ": " + hargaReg[hasil]);
-
-                                        System.out.print("Masukkan Berat Barang: ");
-                                        berat[input] = sc.nextInt();
-                                        jumlah[input] = berat[input] * hargaReg[hasil];
-                                        System.out.println("total pesanan :" + (int) jumlah[input]);
-
+                                    // update no resi
+                                    if (resiIndex != -1) {
+                                        System.out.print("Masukkan No Resi: ");
+                                        noResi[resiIndex] = sc.nextLine();
+                                        System.out.println(" ");
+                                        System.out.println(" !! No Resi Update !!   ");
+                                    } else {
+                                        System.out.println(" ");
+                                        System.out.println(" !! Nama Pengirim Tidak Ditemukan !!");
                                     }
-                                    System.out.println("Masukkan Jumlah Uang Pembayaran: ");
-                                    bayar[input] = sc.nextDouble();
-                                    kembalian[input] = bayar[input] - jumlah[input];
-                                    System.out.println("Kembalian Anda: " + (int) kembalian[input]);
-                                    sc.nextLine();
-                                    System.out.println("Masukkan Status Pengiriman: ");
-                                    status[input] = sc.nextLine();
-                                    System.out.println("Status Pengiriman Anda Saat ini: " + status[input]);
 
-                                    input++;
+                                    if (resiIndex != -1) {
+                                        System.out.println(" ");
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.printf(" | %-13s : %-10s | %n", "No Resi", noResi[resiIndex]);
+                                        System.out.printf(" ------------------------------%n");
+                                        System.out.printf(" | %-13s : %-10s | %n", "Nama Pengirim",
+                                                namaPengirim[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Nama Penerima",
+                                                namaPenerima[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Kota Tujuan", kotaT[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Jenis Layanan", layanan[resiIndex]);
+                                        System.out.printf(" | %-13s : %-10s | %n", "Total Bayar",
+                                                (int) jumlah[resiIndex]);
+                                        System.out.printf(" ------------------------------%n");
+                                    }
+                                }
+                                break;
+                            case 3:
+                                do {
+                                    System.out.println("PIlih Menu: ");
+                                    System.out.println("1. Lacak Pengiriman");
+                                    System.out.println("2. Update Status Pengiriman");
+                                    System.out.print("Masukkan Angka Pilihan: ");
+                                    menu = sc.nextInt();
+                                    switch (menu) {
+                                        case 1:
+                                            if (input < noResi.length) {
+                                                sc.nextLine();
+                                                System.out.println("===================================");
+                                                System.out.println("         LACAK PENGIRIMAN          ");
+                                                System.out.println("===================================");
+
+                                                System.out.print("Masukkan No Resi : ");
+                                                String resiLacak = sc.nextLine();
+
+                                                // Mencari no resi
+                                                int lacakIndex = -1;
+                                                for (int l = 0; l < noResi.length; l++) {
+                                                    if (noResi[l].equalsIgnoreCase(resiLacak)) {
+                                                        lacakIndex = l;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if (lacakIndex != -1) {
+                                                    System.out.println(" Status Pengiriman untuk No Resi " + "'"
+                                                            + noResi[lacakIndex] + "'"
+                                                            + " : " + status[lacakIndex]);
+                                                } else {
+                                                    System.out.println(" No Resi Tidak Ditemukan");
+                                                }
+                                            }
+
+                                            break;
+                                        case 2:
+                                            if (input < status.length) {
+                                                sc.nextLine();
+                                                System.out.println("===================================");
+                                                System.out.println("     UPDATE STATUS PENGIRIMAN      ");
+                                                System.out.println("===================================");
+
+                                                System.out.print("Masukkan No Resi yang akan diupdate status: ");
+                                                String statusUp = sc.nextLine();
+
+                                                // Mencari no resi
+                                                int statusIn = -1;
+                                                for (int q = 0; q < input; q++) {
+                                                    if (noResi[q].equalsIgnoreCase(statusUp)) {
+                                                        statusIn = q;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if (statusIn != -1) {
+                                                    System.out.println(
+                                                            "Masukkan Status Pengiriman (Diproses || Dikirim || Diterima)");
+                                                    status[statusIn] = sc.nextLine();
+                                                    System.out.println("  !Status Pengirim Update!");
+                                                } else {
+                                                    System.out.println("  !No Resi Tidak Ditemukan!");
+                                                }
+                                                input++;
+                                            }
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    System.out.println("Apakah anda ingin kembali?");
+                                    re = sc.next().charAt(0);
+                                } while (re == 'y' || re == 'Y');
+                                break;
+                            case 4:
+                                if (input < noResi.length) {
+                                    sc.nextLine();
+
+                                    System.out.println("Masukkan nomor resi: ");
+                                    String pencResi = sc.nextLine();
+
+                                    int pencarian = -1;
+                                    for (int q = 0; q < noResi.length; q++) {
+                                        if (noResi[q].equalsIgnoreCase(pencResi)) {
+                                            pencarian = q;
+                                            break;
+
+                                        }
+                                    }
+                                    if (pencarian != 1) {
+                                        System.out.println("=================================");
+                                        System.out.println("            PENCARIAN            ");
+                                        System.out.println("=================================");
+                                        System.out.println("No Resi: " + noResi[pencarian]);
+                                        System.out.println("Nama Pengirim: " + namaPengirim[pencarian]);
+                                        System.out.println("Nama Penerima: " + namaPenerima[pencarian]);
+                                        System.out.println("Kota Tujuan: " + kotaT[pencarian]);
+                                        System.out.println("=================================");
+                                    } else {
+                                        System.out.println("No Resii tidak ditemukan");
+                                    }
                                 }
                                 break;
                             // cek ongkir
-                            case 2:
+                            case 5:
                                 System.out.printf("%-5s | %-25s | %-20s | %-20s%n",
                                         "No", "Kota Tujuan", "Harga Standart", "Harga Cargo");
                                 System.out.println(
@@ -488,6 +668,7 @@ public class finalproject {
                                 String ulang = sc.next();
                                 // sc.next();
                                 do {
+
                                     if (ulang.equalsIgnoreCase("y")) {
                                         if (ongkir < kota.length) {
                                             sc.nextLine(); // Membersihkan newline
@@ -523,168 +704,18 @@ public class finalproject {
                                     kembali = sc.next().charAt(0);
                                 } while (kembali == 'y' || kembali == 'Y');
                                 break;
-                            case 3:
-                                if (input < noResi.length) {
-
-                                    sc.nextLine();
-                                    System.out.println("===================================");
-                                    System.out.println("            CETAK RESI             ");
-                                    System.out.println("===================================");
-
-                                    System.out.print("Masukkan Nama Pengirim untuk menambah No Resi: ");
-                                    String Resi = sc.nextLine();
-
-                                    // Mencari pengirim
-                                    int resiIndex = -1;
-                                    for (int n = 0; n < input; n++) {
-                                        if (Resi.equalsIgnoreCase(namaPengirim[n])) {
-                                            resiIndex = n;
-                                            break;
-                                        }
-                                    }
-
-                                    // update no resi
-                                    if (resiIndex != -1) {
-                                        System.out.print("Masukkan No Resi: ");
-                                        noResi[resiIndex] = sc.nextLine();
-                                        System.out.println("  !No Resi Update!");
-                                    } else {
-                                        System.out.println("Nama Pengirim Tidak Ditemukan");
-                                    }
-
-                                    System.out.println("---------------------------------------------------");
-                                    // System.out.println(" ");
-                                    System.out.println(" No Resi        : " + noResi[resiIndex]);
-                                    System.out.println(" Nama Pengirim  : " + namaPengirim[resiIndex]);
-                                    System.out.println(" Nama Penerima  : " + namaPenerima[resiIndex]);
-                                    System.out.println(" Kota Tujuan    : " + kotaT[resiIndex]);
-                                    System.out.println(" Jenis Layanan  : " + layanan[resiIndex]);
-                                    System.out.println(" Total Bayar    : " + jumlah[resiIndex]);
-                                    System.out.println(" Status Pesanan : " + status[resiIndex]);
-                                    System.out.println("---------------------------------------------------");
-                                    input++;
-                                }
-                                break;
-                            case 4:
-                                if (input < noResi.length) {
-
-                                    System.out.println("Masukkan nomor resi: ");
-                                    String pencResi = sc.nextLine();
-
-                                    int pencarian = -1;
-                                    for (int f = 0; f < noResi.length; f++) {
-                                        if (noResi[f].equalsIgnoreCase(pencResi)) {
-                                            pencarian = f;
-                                            break;
-
-                                        }
-                                    }
-                                    System.out.println("No Resi: " + noResi[pencarian]);
-                                    System.out.println("Nama Pengirim: " + namaPengirim[pencarian]);
-                                    System.out.println("Nama Penerima: " + namaPenerima[pencarian]);
-                                    System.out.println("Kota Tujuan: " + kotaT[pencarian]);
-                                }
-                                break;
-                            case 5:
-                                System.out.println("Pilih Menu");
-                                System.out.println("1. Lacak Pengiriman");
-                                System.out.println("2. Update Status Pengiriman");
-                                System.out.println("Masukkan Angka Pilihan Menu: ");
-                                int choice = sc.nextInt();
-                                switch (choice) {
-                                    case 1:
-                                        if (input < noResi.length) {
-                                            sc.nextLine();
-                                            System.out.println("===================================");
-                                            System.out.println("         LACAK PENGIRIMAN          ");
-                                            System.out.println("===================================");
-
-                                            System.out.print("Masukkan No Resi : ");
-                                            String resiLacak = sc.nextLine();
-                                            System.out.println("--------------------------");
-
-                                            // Mencari no resi
-                                            int lacakIndex = -1;
-                                            for (int q = 0; q < noResi.length; q++) {
-                                                if (noResi[q].equalsIgnoreCase(resiLacak)) {
-                                                    lacakIndex = q;
-                                                    System.out.println(
-                                                            "Status Pengiriman untuk No Resi " + "'" + resiLacak + "'"
-                                                                    + ": " + status[lacakIndex]);
-                                                    break;
-                                                }
-                                            }
-
-                                            // Check if the resiLacak was not found
-                                            if (lacakIndex == -1) {
-                                                System.out.println("!No Resi Tidak Ditemukan!");
-                                            }
-                                        }
-                                        break;
-                                    case 2:
-                                        if (input < status.length) {
-
-                                            sc.nextLine();
-                                            System.out.println("===================================");
-                                            System.out.println("     UPDATE STATUS PENGIRIMAN      ");
-                                            System.out.println("===================================");
-
-                                            System.out.print("Masukkan No Resi yang akan diupdate status: ");
-                                            String statusUp = sc.nextLine();
-
-                                            // Mencari no resi
-                                            int hasilstatus = -1;
-                                            for (int q = 0; q < noResi.length; q++) {
-                                                if (noResi[q].equalsIgnoreCase(statusUp)) {
-                                                    hasilstatus = q;
-                                                    break;
-                                                }
-                                            }
-
-                                            if (hasilstatus != -1) {
-                                                System.out.println(
-                                                        "Masukkan Status Pengiriman (Diproses || Dikirim || Diterima): ");
-                                                status[input] = sc.nextLine();
-                                                System.out.println("  !Status Pengirim Update!  ");
-                                            } else {
-                                                System.out.println("  !No Resi Tidak Ditemukan! ");
-                                            }
-                                            input++;
-                                        }
-                                        break;
-                                    default:
-                                        break;
-                                }
-
-                                break;
-                            case 6:
-                                for (int b = 0; b < input; b++) {
-                                    System.out.println(" ");
-                                    System.out.println("===================================");
-                                    System.out.println("         LAPORAN PENDAPATAN        ");
-                                    System.out.println("===================================");
-                                    System.out.println(" No Resi       : " + (noResi[b] != null ? noResi[b] : ""));
-                                    System.out.println(
-                                            " Nama Pengirim : " + (namaPengirim[b] != null ? namaPengirim[b] : ""));
-                                    System.out.println(
-                                            " Nama Penerima : " + (namaPenerima[b] != null ? namaPenerima[b] : ""));
-                                    System.out.println(" Kota Tujuan   : " + (kotaT[b] != null ? kotaT[b] : ""));
-                                    System.out.println(" Jenis Layanan : " + (layanan[b] != null ? layanan[b] : ""));
-                                    System.out.println(" Total Bayar   : " + (jumlah[b] != 0.0 ? jumlah[b] : ""));
-                                    System.out.println(" Status        : " + (status[b] != null ? status[b] : ""));
-                                    System.out.println();
-                                }
-                                break;
                             default:
                                 break;
                         }
-
-                        System.out.println("Apakah anda ingin keluar?(y/n)");
+                        System.out.println("Apakah anda ingin lanjut?(y/n)");
                         keluar = sc.next().charAt(0);
-                    } while (keluar == 'n' || keluar == 'N');
+                    } while (keluar == 'y' || keluar == 'Y');
                 }
                 percobaan++;
             }
-        } while (login);
+            System.out.println("Selesai? (y/n)");
+            keluar = sc.next().charAt(0);
+        } while (keluar == 'n' || keluar == 'N');
+
     }
 }
