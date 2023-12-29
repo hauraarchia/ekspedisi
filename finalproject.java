@@ -6,6 +6,7 @@ public class finalproject {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         char kembali;
+        int menu = 0;
 
         // data admin dan kasir
         String[] userName = { "haura", "isna" };
@@ -115,12 +116,13 @@ public class finalproject {
                         System.out.println("5. Kelola Ongkir ");
                         System.out.println("6. Laporan Pendapatan ");
                         System.out.println("7. Keluar");
-                        System.out.println("=====================================");
+                        System.out
+
+                                .println("=====================================");
 
                         System.out.print("Masukkan Angka Pilihan Menu: ");
-                        int menu = sc.nextInt();
+                        menu = sc.nextInt();
                         switch (menu) {
-
                             case 1:
                                 // input data baarang
                                 if (input < namaPengirim.length) {
@@ -403,15 +405,11 @@ public class finalproject {
                                 }
                                 break;
                             case 7:
-                                return;
+                                break;
                             default:
                                 break;
                         }
-                        System.out.println(" ");
-                        System.out.println("Apakah anda ingin menjalankan menu lain?(y/n)");
-                        re = sc.next().charAt(0);
-                    } while (re == 'y' || re == 'Y');
-                    break;
+                    } while (menu != 7);
                 }
                 if (userName[1].equals(username) && password[1].equals(pass)) {
                     System.out.println("Anda Sedang Login Sebagai Kasir");
@@ -428,7 +426,7 @@ public class finalproject {
                         System.out.println("=====================================");
 
                         System.out.print("Masukkan Angka Pilihan Menu: ");
-                        int menu = sc.nextInt();
+                        menu = sc.nextInt();
                         switch (menu) {
 
                             case 1:
